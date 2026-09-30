@@ -1,38 +1,94 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700;800&display=swap");
+@import "tailwindcss";
 
-:root {
-  font-family: 'DM Sans', sans-serif;
-  color: #f5f3ed;
-  background: #111412;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  --color-ink: #f5f3ed;
-  --color-muted: #a5aaa4;
-  --color-surface: #191d1a;
-  --color-accent: #d3f36b;
+/* Nyolo Pilem — brand tokens (lihat panduan UI/UX) */
+@theme {
+  --color-base: #1a1d20; /* Dark Charcoal: background utama */
+  --color-surface: #2d3238; /* Slate Gray: kartu, border, divider */
+  --color-ink: #ffffff; /* Pure White: judul & teks penting */
+  --color-muted: #9aa0a6; /* Metallic Silver: sub-teks & placeholder */
+  --color-line: #2d3238;
+  --color-brand: #e5a93b; /* Cinematic Amber: CTA, status aktif, rating */
+  --color-brand-hover: #efba57;
+
+  --font-display: "Montserrat", "Inter", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+
+  --radius-control: 8px;
+  --radius-card: 12px;
+
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.35);
+
+  --breakpoint-tablet: 900px;
+  --breakpoint-phone: 620px;
+
+  --animate-reveal: reveal 0.6s ease both;
+  --animate-shimmer: shimmer 1.4s linear infinite;
+
+  @keyframes reveal {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes shimmer {
+    to {
+      background-position-x: -200%;
+    }
+  }
 }
 
-* {
-  box-sizing: border-box;
-}
+@layer base {
+  html {
+    font-family: var(--font-body);
+    color: var(--color-ink);
+    background: var(--color-base);
+    color-scheme: dark;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 
-body {
-  min-width: 320px;
-  min-height: 100vh;
-  margin: 0;
-  background: #111412;
-  color: var(--color-ink);
-  font-family: 'DM Sans', sans-serif;
-}
+  body {
+    min-width: 320px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
 
-button,
-a {
-  -webkit-tap-highlight-color: transparent;
-}
+  #root {
+    min-height: 100vh;
+  }
 
-::selection {
-  color: #111412;
-  background: var(--color-accent);
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background: var(--color-brand);
+    color: var(--color-base);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
 }
